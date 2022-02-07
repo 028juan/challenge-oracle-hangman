@@ -8,7 +8,13 @@ var vidas =5
 var palabra;
 var guionPalabra;
 var repetidas;
- 
+var letrasDisponibles;
+var alfabeto;
+
+
+
+
+//---------------palabra ingresada 
 var newPalabra = document.getElementById("nueva-palabra");
 newPalabra.addEventListener("click",validacion);
 function validacion(){
@@ -19,8 +25,8 @@ function validacion(){
         palSecreta.push(nuePalabra)
         swal ("agregado")
     }else{
-        sawl ({
-            tex:"solo mayusculas",
+        swal({
+            text:"solo letras",
             icon:"error",
             buttons:false,
         })
@@ -28,15 +34,24 @@ function validacion(){
     document.getElementById("input-nueva-palabra").value = ""
     document.getElementById("input-nueva-palabra").focus()
 }
+//______________________
+
+
+
+
 document.getElementById("ahorcado").style.display="none";
-document.querySelector(".titulo").style.display="none";
+
 document.getElementById("reiniciar").style.display="none";
+document.getElementById("abecedario").style.display ="none";
 
 var iniciar = document.getElementById("iniciar-juego")
 iniciar.addEventListener("click",function(){
     palabra = palSecreta[Math.floor(Math.random()*palSecreta.length)]
+
     document.getElementById("ahorcado").style.display="block";
-    document.querySelector(".titulo").style.display="block";
+    document.getElementById("areaJuego").style.display= "flex";
+    
+    document.getElementById("abecedario").style.display="block";
 
     guionPalabra = palabra.replace(/./g,"_ ")
 
@@ -47,21 +62,35 @@ iniciar.addEventListener("click",function(){
     document.getElementById("vida").innerHTML = "vidas restantes:  "+vidas;
     
     dibujarBase()
+    
+ 
 
-    window.addEventListener("keydown",ingLetra);
+
+
 })
 
-function ingLetra(e){
-    var tecla = e.keyCode || e.which;
-    if(tecla>64 && tecla <91){
-        letra = e.key.toUpperCase()
-        console.log(letra)
-        examinarLetra(letra);
-    }
-}
+
+
+
+//-------------alfabeto-----------
+letrasDisponibles = document.getElementById("abecedario")
+alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");//transforma arreglo
+alfabeto.forEach((elemento)=> {
+    var button = document.createElement("button")
+    button.innerHTML = elemento
+    letrasDisponibles.appendChild(button).id= elemento;
+
+    button.addEventListener("click", (e) => {
+        var letreaSeleccionada = e.target.id;
+        examinarLetra(letreaSeleccionada)
+
+    })
+
+
+})
 
 function examinarLetra(letra){
-    console.log(letra)
+    
    var  nueva = "";
    var errar = true
    for (var i=0; i < palabra.length; i++){
@@ -96,7 +125,7 @@ function examinarLetra(letra){
             dibujarOjos();
             document.getElementById("perdedor").innerHTML = "FIN JUEGO! - era :" +palabra
             document.getElementById("reiniciar").style.display="block";
-            window.removeEventListener("keydown",ingLetra)
+            document.getElementById("abecedario").style.display ="none";//saco el abecedario
         }
         document.getElementById("vida").innerHTML = "cantidad vidas  " + vidas;        
     }
@@ -108,7 +137,8 @@ function examinarLetra(letra){
     if(guionPalabra.search("_") === -1){
         document.getElementById("ganador").innerHTML = "FELICIDADES GANASTE"
         document.getElementById("reiniciar").style.display="block";
-        window.removeEventListener("keydown",ingLetra)
+        document.getElementById("abecedario").style.display ="none";//saco el abecedario
+        
     }
 
 }
@@ -121,6 +151,7 @@ function comprobarLetra(valor){
         letError.push(letra)
         document.getElementById("letrasError").innerHTML = letError
         agregar = true
+      
     }else{
         letRepetida.push(letra)
         swal ({
@@ -133,73 +164,3 @@ function comprobarLetra(valor){
 }
 
 
-
-
-/*
-
-comienzo();
-var btnComienso=getElementById("iniciar-juego");
-
-function ocultarBtn(){
-    btnComienso.style.display="none"
-}
-
-function comienzo(){
-    // la palabra seleccionada aleatoriamente
-    palabraSelec = palabras[Math.floor(Math.random()*palabras.length)];
-    console.log(palabraSelec)
-    //palabra secreta se remplace con guionesp
-    guionPalabra = "";
-    for(var i =0; i < palabraSelec.length; i++){
-        
-        guionPalabra = guionPalabra + ("_ ");
-    }
-    // hacer visible palabra secreta utilisando guiones
-    document.getElementById("oculto").innerHTML = guionPalabra;
-}
-
-
-var vida = 5
-document.getElementById("vidas").innerHTML = "El total de vidas es: " + vida;
-// captura el boton probar-letra
-document.getElementById("btn_ingreso").addEventListener("click", verificar)
-
-
-
-
-function verificar(){
-    // se captura lo ingresado por el usuario
-    var letra = document.getElementById("texto_ingresado").value.toLowerCase();
-    var nuevaLetra = "";
-    var error = true
-    for(var i =0; i < palabraSelec.length; i++){
-        if(letra == palabraSelec[i]){
-            nuevaLetra = nuevaLetra + letra + " ";
-            error = false             
-        }else{
-            nuevaLetra = nuevaLetra + guionPalabra[i*2] + " "            
-        }
-
-    }
-
-    if (error){
-        vida --;
-        document.getElementById("vidas").innerHTML = "El total de vidas es: " + vida;
-    }
-    guionPalabra = nuevaLetra
-   
-    document.getElementById("oculto").innerHTML = guionPalabra;
-
-    if(vida == 0){
-        alert("perdiste")
-    }
-    if (guionPalabra.search("_") == -1){
-        alert("ganaste")
-    }
-    document.getElementById("texto_ingresado").value ="";
-    document.getElementById("texto_ingresado").focus();
-    dibujar();
-
-
-
-}*/

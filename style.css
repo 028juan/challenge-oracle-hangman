@@ -1,31 +1,44 @@
 
 .titulo {
-  position: absolute;
-  left:15em;  
-  top: 10em;
-  padding: 15px;
-  width: 30vw;
-  margin: auto;
+  padding: 1px;
+  text-align: center;
+  font-size: 50px;
+
+  margin:auto
 }
-#ahorcado {
-  border: 10px solid rgb(255, 166, 0);
-  background-color: yellow;  
-}
-.mensaje {
-  position: absolute;
-  left: 35em;
-  top: 30em;
-}
-.tareas {
-  max-width: 70rem;
-  width: 100%;
-  padding: 2rem;
-  margin: auto;
-}
+
 body {
   background-image:url(https://media.istockphoto.com/vectors/pop-art-gallows-rope-loop-hanging-icon-isolated-on-color-background-vector-id1271984032?k=20&m=1271984032&s=612x612&w=0&h=GhuJZpdF_HAGegeZnVlWhpGOXKGOVizelxY-OptKdY4=);
-  font-family: sans-serif;  
+  font-family: sans-serif;
+  background-size: cover;
+  width: 70%;  
 }
+
+.tareas {
+  
+  width: 70%;
+  max-width: 100px;
+  
+  
+  
+}
+
+#areaJuego{
+  display: none;
+  height: 100vh;
+  justify-content: center;
+  width: 100%;
+  margin :auto;
+  position:absolute;
+ 
+}
+#nombreJuego{
+  
+  font-size: 30px;
+  padding: 18px;
+  color: rgb(15, 15, 15);
+}
+
 .btn {  
   border: 0;
   color: white;
@@ -36,6 +49,7 @@ body {
   margin-bottom: 3px;
   border-radius: 0.5em;
 }
+
 .text-input {
   border-radius: 0.5em;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -46,37 +60,90 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
+
+
 #palabraSecreta {
+  max-width: 100%;
   font-family:georgia,serif;
-  font-size: 40px;
+  font-size: 25px;
   letter-spacing: 3px;
-  padding: 15px;  
+  padding: 10px; 
   text-align: center;
-  word-spacing: 3px;
+  white-space: nowrap;
   color: blue;
+  
+  
 }
+
+
 #letrasError {
   font-family: georgia,serif;
   font-size: 20px;
   letter-spacing: 3px;
   padding: 15px;
-  color: blue;
+  color: rgb(250, 36, 20);
 }
+
+
 #vida {
   font-size: 20px;
   color: blue;
 }
+
+#inicio {
+  font-size: 7rem;
+  position: absolute;
+  width:100%
+
+}
+
+#ahorcado {
+ 
+  background-color: yellow; 
+  width: 100%;
+  
+  
+}
+.mensaje {
+  position: absolute;
+  display: block;
+
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  top: 8em
+  
+
+  
+  
+}
+
+
+#abecedario {
+  
+  background-color: aquamarine;
+  border-radius: 2px;
+  
+  padding : 5px;
+  text-align: center;
+
+    
+}
+
+
+
 #perdedor {
   position: absolute;
-  left: 10em;
-  top: 5em;
+  
   font-size: 20px;
+  top:20em;
+  text-align: center;
   color: rgb(243, 57, 128);
 }
 #ganador {
   position: absolute;
-  left: 10em;
-  top: 5em;
+  top:20em;
+  text-align: center;
   font-size: 20px;
   color: rgb(73, 226, 43);
 
@@ -87,6 +154,27 @@ body {
   text-align: center;
   width: 100%;
   max-width: 100%;
-  position: initial;
+
+  position: fixed;
   bottom: 0px;
+  
+}
+@media screen and(min-with :300px) and (max-width:800px){
+  .inicio{
+    width :100%;
+  
+  }
+  #areaJuego{
+    width: 100%;
+  }
+  body{
+    width:100%
+  }
+  .mensaje {
+    width:30%;
+   
+    
+  
+
+  }
 }
